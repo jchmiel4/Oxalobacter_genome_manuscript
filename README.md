@@ -35,7 +35,7 @@ Scripts to reproduce the analyses in "New perspectives on an old grouping: the g
 `oxalobacter_genome_analysis.txt`: scripts for main genome analysis
 
 ## Data Availability
-To use these scripts, please download the demultiplezed reads from the Sequence Read Archive (PRJNA836912) and/or the genomes from GenBank (Pending).
+To use these scripts, please download the demultiplexed reads from the Sequence Read Archive (PRJNA836912) and/or the genomes from GenBank (Pending).
 
 ## Type strain availability
 Type strains can be found at the following culutre collection centers.
