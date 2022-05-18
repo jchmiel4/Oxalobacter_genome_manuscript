@@ -85,7 +85,7 @@ oxf_pcoa <-  ggplot(full_pcoa, aes(x = V1, y = V2, fill = Taxon, color = Taxon))
   theme_classic() + 
   theme(panel.grid.major = element_blank(), 
         panel.grid.minor = element_blank(),
-        panel.background = element_rect(colour = "transparent", size = 1, fill = NA),
+        panel.background = element_rect(colour = "black", size = 1, fill = NA),
         legend.title = element_text(size = 9,  face = "bold"),
         legend.text = element_text(size = 8, face = "italic"),
         legend.key.size = unit(4, "mm", 'lines'),
