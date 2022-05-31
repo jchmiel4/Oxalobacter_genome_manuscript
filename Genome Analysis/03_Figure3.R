@@ -9,6 +9,7 @@ library(tidyverse)
 library(ggrepel)
 library(ggplot2)
 library(ggforce)
+library(gggenes)
 library(pairwiseAdonis)
 library(viridis)
 library(ComplexHeatmap)
@@ -169,8 +170,29 @@ ComplexHeatmap::pheatmap(
 dev.off()
 
 
+### Script for Cas gene ribbon structures in Figure 3C
+# Load data
+cas <- read.table("~/SCIENCE/Project_oxalobacter/genome_analysis/!key_files/CRISPRCasFinder/cas_regions3.txt", header = TRUE, check.names = FALSE, row.names = NULL, sep = "\t")
 
-### Script for circular heatmap in Figure 3C
+# Plot cas sequences
+cas_plot <- ggplot(cas, aes(xmin = start, xmax = end, y = genome, fill = gene, label = gene)) +
+  geom_gene_arrow(arrowhead_height = unit(5, "mm"), arrowhead_width = unit(1, "mm"), arrow_body_height = unit(5, "mm")) +
+  #ggplot2::layer(params = list(max.size = 6)) +
+  geom_gene_label(fontface = "italic", size = 12, padding.x = unit(0.75, "mm"), padding.y = unit(0, "mm"), grow = FALSE) +
+  facet_wrap(~ genome, scales = "free_y", ncol = 1) +
+  scale_fill_brewer(palette = "Set3") +
+  theme_genes() +
+  theme(legend.position="none",
+        axis.text.x = element_blank(),
+        axis.ticks.x = element_blank(),
+        axis.text.y = element_blank(),
+        axis.title.y = element_blank(),
+        strip.text = element_text(size = 10, face = "italic", margin = margin(b=5)))
+
+# Save plot
+ggsave(cas_plot, filename = "~/SCIENCE/Project_oxalobacter/genome_analysis/!key_files/raw_figures/cas_plot2.pdf", width = 250, height = 90, units = "mm")
+
+### Script for circular heatmap in Figure 3D
 # Load in data
 mm <- read.table("~/SCIENCE/Project_oxalobacter/genome_analysis/!key_files/genome_facts/genome_facts.txt", header = TRUE, check.names = FALSE, sep = "\t", row.names = 1)
 
@@ -212,7 +234,7 @@ legend(-1.07, 0.735, legend = c("0", "1", "2"), title = "Antibiotic reistance", 
 circos.clear()
 dev.off()
 
-### Script for presence/absence plot in Figure 3D
+### Script for presence/absence plot in Figure 3E
 
 # Load in data
 prophage <- read.csv("~/SCIENCE/Project_oxalobacter/genome_analysis/!key_files/genome_facts/prophage_summary_clean.csv", check.names = FALSE, header = TRUE)
