@@ -1,0 +1,64 @@
+# UNIX scripts
+
+# Demultiplex the samples -----------------------------------------------------------
+# Program: cutadapt3.2
+
+
+# Unzip the sequnce files
+unzip SRK-FLY_S1_L001_R1_001.fastq.zip
+unzip SRK-FLY_S1_L001_R2_001.fastq.zip
+
+
+# This is required for Linux on PC
+ulimit -n 4096
+
+# Removes adapter and barcodes --> renames files based on L and R barcodes
+cutadapt \
+-j 6 -e 0.2 --no-indels \
+-m 1 \
+-g file:barcodes_Left.fasta \
+-G file:barcodes_Right.fasta \
+-o demultiplex_reads/{name1}-{name2}-R1.fastq -p demultiplex_reads/{name1}-{name2}-R2.fastq \
+SRK-FLY_S1_L001_R1_001.fastq SRK-FLY_S1_L001_R2_001.fastq
+
+# Remove anything with unknown in it
+rm -r *unknown*
+
+# Remove primers
+for i in *-R1.fastq
+do
+         sample=$(echo ${i} | sed "s/\-R1\.fastq//")
+         cutadapt \
+                 -e 0.1 -m 1 --discard-untrimmed -j 6 \
+                 -a GTGCCAGCMGCCGCGGTAA...ATTAGAWACCCBDGTAGTCC \
+                 -A GGACTACHVGGGTWTCTAAT...TTACCGCGGCKGCTGGCAC \
+                 -o trimmed_reads/${sample}_1.fastq \
+                 -p trimmed_reads/${sample}_2.fastq \
+                 ${sample}-R1.fastq ${sample}-R2.fastq
+done
+
+# Rename files based on patterns_new.txt
+cp -r "/mnt/c/Users/john_/Documents/SCIENCE/Project_Oxalate_venema/SRK-16S_new/SRK-16S_reads/patterns_new.txt" ~/SRK-16S_reads/demultiplex_reads/trimmed_reads/
+
+mmv < patterns_new.txt
+
+
+
+
+
+
+# PICRUSt 2 -----------------------------------------------------------
+
+
+# Active conda env
+conda activate picrust2
+# Run picrust2
+picrust2_pipeline.py -s ~/ox_project/16S_oxalate/data/picrust2_svs.fasta \
+	-i ~/ox_project/16S_oxalate/data/picrust2_counts.txt \
+	-o ~/ox_project/16S_oxalate/data/picrust2_out_pipeline \
+	-p 6 --verbose --stratified --per_sequence_contrib
+
+
+
+
+
