@@ -32,8 +32,8 @@ do
                  -e 0.1 -m 1 --discard-untrimmed -j 6 \
                  -a GTGCCAGCMGCCGCGGTAA...ATTAGAWACCCBDGTAGTCC \
                  -A GGACTACHVGGGTWTCTAAT...TTACCGCGGCKGCTGGCAC \
-                 -o trimmed_reads/${sample}_1.fastq \
-                 -p trimmed_reads/${sample}_2.fastq \
+                 -o trimmed_reads/${sample}-R1.fastq \
+                 -p trimmed_reads/${sample}-R2.fastq \
                  ${sample}-R1.fastq ${sample}-R2.fastq
 done
 
