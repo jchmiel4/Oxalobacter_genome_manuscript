@@ -23,7 +23,7 @@ group_counts <- as.matrix(final_counts_table[, c(grep("RV_no", colnames(final_co
 # Data handling ----------------------------
 
 # Sum all the reads by the 6th taxonomic level -> genus (separated by :)
-split6 <- sapply(strsplit(as.character(tax), ":"), "[", 6)
+split6 <- sapply(strsplit(as.character(tax$tax_vector), ":"), "[", 6)
 
 # Aggregate data based on genus identifier
 agg6 <- aggregate(group_counts, by = list(split6), FUN = sum)
