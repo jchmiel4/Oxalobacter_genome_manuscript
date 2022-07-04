@@ -6,6 +6,7 @@ library(ggtree)
 library(tidyverse)
 library(ggmsa)
 library(Biostrings)
+library(treeio)
 
 ### Script for phylogenetic tree in Figure 2A
 
@@ -13,25 +14,43 @@ library(Biostrings)
 rRNA_tree_file <- read.tree("~/SCIENCE/Project_oxalobacter/genome_analysis/!key_files/oxf_16S_seqs/strains_16S_tree/RAxML_bestTree.subtree")
 rRNA_meta <- read.csv("~/SCIENCE/Project_oxalobacter/genome_analysis/!key_files/oxf_16S_seqs/rRNA_meta.csv")
 
-# Generate tree
-rRNA_tree <- ggtree(rRNA_tree_file, size=0.25, branch.length="none") %<+% rRNA_meta +
+# Load and format bootstrapping values
+# Load data
+rRNA_tree_file <- read.tree("~/SCIENCE/Project_oxalobacter/genome_analysis/!key_files/oxf_16S_seqs/strains_16S_tree/RAxML_bestTree.subtree")
+rRNA_meta <- read.csv("~/SCIENCE/Project_oxalobacter/genome_analysis/!key_files/oxf_16S_seqs/rRNA_meta.csv")
+
+
+# Load bootstrap file
+bootstrap_file <- read.raxml("~/SCIENCE/Project_oxalobacter/genome_analysis/!key_files/oxf_16S_seqs/strains_16S_tree/RAxML_bipartitionsBranchLabels.subtree")
+
+# Combine the bootstrap data
+bootstrap <- data.frame(bootstrap_file@data[["node"]], bootstrap_file@data[["bootstrap"]])
+colnames(bootstrap) <- c("node", "bs_val")
+
+# Prep the filler/dummy data
+node_fill <- 1:25
+bs_fill <- numeric(25)
+fill <- data.frame(node_fill, bs_fill)
+colnames(fill) <- c("node", "bs_val")
+
+# Merge them all
+bootstrap_all <- rbind(fill, bootstrap)
+bootstrap_all[is.na(bootstrap_all)] <- 0
+
+# Generate 16S rRNA tree
+rRNA_tree <- ggtree(rRNA_tree_file, size = 0.25) %<+% rRNA_meta +
   guides(color = guide_legend(override.aes = list(size = 1.5, shape = 15))) +
   scale_colour_manual(name="New Species Designation", values = c("#9999ff", "#bf546a", "#CD950C", "#8BABD3")) +
   geom_tippoint(aes(color = group), size = -100) +
   geom_tiplab(aes(subset = !grepl("WoOx3", label), color = group), hjust = 0, offset = 0.001, show.legend = F, size = 2.5, linesize = 0.25) +
   geom_tiplab(aes(subset=grepl("WoOx3", label), label = paste0('italic("O. vibrioformis")~', "WoOx3",'')), parse = TRUE, hjust = 0, offset = 0.001, show.legend = F, size = 2.5, linesize = 0.25) +
-  xlim(0,16) +
+  xlim(0, 0.07) +
   theme(legend.position=c(0.2,0.9), 
         legend.text = element_text(size = 7.25, face = "italic"), 
         legend.title = element_text(size=7.25, face = "bold"), 
         legend.key.size = unit(3, "mm", 'lines'), 
-        legend.background=element_blank())
-  
-# Tree with branches (delete later, testing now)
-ggtree(rRNA_tree_file, size=0.25) %<+% rRNA_meta +
-  geom_tiplab(aes(subset=!grepl("WoOx3", label), color=group), hjust=0, offset = 0.001, show.legend=F, size = 2.5, linesize = 0.25) +
-  geom_tiplab(aes(subset=grepl("WoOx3", label), label=paste0('italic(', "O.", ')~italic(', "vibrioformis", ')~', "WoOx3",'')), parse = TRUE, hjust = 0, offset = 0.001, show.legend = F, size = 2.5, linesize = 0.25) 
-
+        legend.background=element_blank()) +
+  geom_nodepoint(aes(label = bootstrap_all$bs_val, subset = as.numeric(bootstrap_all$bs_val) > 70), size = 1.5, colour ="steelblue", alpha = 0.75, pch = 16)
 
 # Save tree
 ggsave(rRNA_tree, filename = "~/SCIENCE/Project_oxalobacter/genome_analysis/!key_files/raw_figures/rRNA_tree.pdf", height = 80, width = 80, units = "mm")
