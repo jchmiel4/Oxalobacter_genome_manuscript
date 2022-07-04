@@ -8,6 +8,7 @@ library(RColorBrewer)
 library(ggplot2)
 library(ComplexHeatmap)
 library(UpSetR)
+library(treeio)
 
 ### Script for phylogenetic tree in Figure 1A
 
@@ -15,21 +16,38 @@ library(UpSetR)
 core_tree_file <- read.tree("~/SCIENCE/Project_oxalobacter/genome_analysis/!key_files/orthofinder2/raxml/RAxML_bestTree.core")
 core_meta <- read.csv("~/SCIENCE/Project_oxalobacter/genome_analysis/!key_files/orthofinder2/raxml/tree_meta.csv")
 
+# Load bootstrap file
+bootstrap_file <- read.raxml("~/SCIENCE/Project_oxalobacter/genome_analysis/!key_files/orthofinder2/raxml/RAxML_bipartitionsBranchLabels.core")
+
+# Combine the bootstrap data
+bootstrap <- data.frame(bootstrap_file@data[["node"]], bootstrap_file@data[["bootstrap"]])
+colnames(bootstrap) <- c("node", "bs_val")
+
+# Prep the filler/dummy data
+node_fill <- 1:22
+bs_fill <- numeric(22)
+fill <- data.frame(node_fill, bs_fill)
+colnames(fill) <- c("node", "bs_val")
+
+# Merge them all
+bootstrap_all <- rbind(fill, bootstrap)
+bootstrap_all[is.na(bootstrap_all)] <- 0
 
 # Generate tree
-core_tree <- ggtree(core_tree_file, size=0.25) %<+% core_meta +
+core_tree <- ggtree(core_tree_file, size = 0.25) %<+% core_meta +
   theme(legend.position=c(0.12,0.9), legend.text = element_text(size = 7.5), legend.title = element_text(size=7.5), legend.key.size = unit(1, "mm", 'lines')) +
   guides(color = guide_legend(override.aes = list(size = 1.5, shape = 15))) +
   scale_colour_manual(name = "Original Grouping", values = c("gray5", "gray40", "gray65")) +
   geom_treescale(x = 0, y = -0.5,linesize = 0.35, offset=0.15, width = 0.05, fontsize = 2.25) +
   geom_tippoint(aes(color=group), size=-100) +
   geom_tiplab(aes(subset=!grepl("WoOx3", label), color=group), hjust=0, offset = 0.001, show.legend = F, align = T, size = 2.5, linesize = 0.25) +
-  geom_tiplab(aes(subset=grepl("WoOx3", label), label = paste0('italic("O. vibrioformis")~', "WoOx3")), parse = TRUE, hjust = 0, offset = 0.001, show.legend = F, align = T, size = 2.5, linesize = 0.25) +
+  geom_tiplab(aes(subset = grepl("WoOx3", label), label = paste0('italic("O. vibrioformis")~', "WoOx3")), parse = TRUE, hjust = 0, offset = 0.001, show.legend = F, align = T, size = 2.5, linesize = 0.25) +
   geom_strip("OxCC13", "ERR2013569", barsize = 0.35, offset = 0.21, color = "#bf546a", label = "O. formigenes", offset.text = 0.01, fontsize = 2.5, extend = 0.4) + 
   geom_strip("HOxNP-1", "BA2", barsize = 0.35, offset = 0.21, color = "#9999ff", label = "O. aliformigenes", offset.text = 0.01, fontsize = 2.5, extend = 0.4) +
   geom_strip("OxGP1", "OxGP1", barsize = 0.35, offset = 0.21, color = "#CD950C", label = "O. paeniformigenes", offset.text = 0.01, fontsize = 2.5, extend = 0.4) +
   geom_strip("HOxBLS", "MGYG-HGUT-02505", barsize = 0.35, offset = 0.21, color = "#8BABD3", label = "O. paraformigenes", offset.text = 0.01, fontsize = 2.5, extend = 0.4) +
-  xlim(0,0.9)
+  xlim(0,0.9) +
+  geom_nodepoint(aes(label = bootstrap_all$bs_val, subset = as.numeric(bootstrap_all$bs_val) > 70), size = 1.5, color="steelblue", alpha = 0.75, pch = 16)
 
 # Save tree
 ggsave(core_tree, filename = "~/SCIENCE/Project_oxalobacter/genome_analysis/!key_files/raw_figures/core_phylo_tree.pdf", height = 80, width = 140, units = "mm")
