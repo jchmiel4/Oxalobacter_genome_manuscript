@@ -40,15 +40,15 @@ To use these scripts, please download the demultiplexed reads from the Sequence 
 ## Type strain availability
 Type strains can be found at the following culutre collection centers.
 
-<i>O. formigenes</i> OxB --> ATCC 35274
+<i>O. formigenes</i> OxB<sup>T</sup> --> <a href="https://www.atcc.org/products/35274">ATCC 35274</a>
 
-<i>O. aliformigenes</i> Va3
+<i>O. aliformigenes</i> Va3<sup>T</sup>
 
-<i>O. paeniformigenes</i> OxGP1
+<i>O. paeniformigenes</i> OxGP1<sup>T</sup>
 
-<i>O. paraformigenes</i> HOxBLS
+<i>O. paraformigenes</i> HOxBLS<sup>T</sup>
 
-<i>O. vibrioformis</i> WoOx3 --> DSM 5502
+<i>O. vibrioformis</i> WoOx3<sup>T</sup> --> <a href="https://www.dsmz.de/collection/catalogue/details/culture/DSM-5502">DSM 5502</a>
 
 ## Citation
-Pending...
+Chmiel JA, Carr C, Stuivenberg GA, Venema R, Chanyi RM, Al KF, Giguere D, Say H, Akouris PP, Domínguez Romero SA, Kwong A, Tai V, Koval SF, Razvi H, Bjazevic J, Burton JP (2022) New perspectives on an old grouping: The genomic and phenotypic variability of <i>Oxalobacter formigenes</i> and the implications for calcium oxalate stone prevention. Front. Microbiol. 13:1011102. doi: 10.3389/fmicb.2022.1011102
