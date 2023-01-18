@@ -42,7 +42,7 @@ Type strains can be found at the following culutre collection centers.
 
 <i>O. formigenes</i> OxB<sup>T</sup> --> <a href="https://www.atcc.org/products/35274">ATCC 35274</a>
 
-<i>O. aliformigenes</i> Va3<sup>T</sup> --> DSM 115068
+<i>O. aliiformigenes</i> Va3<sup>T</sup> --> DSM 115068
 
 <i>O. paeniformigenes</i> OxGP1<sup>T</sup> --> DSM 115066
 
