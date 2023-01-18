@@ -42,13 +42,13 @@ Type strains can be found at the following culutre collection centers.
 
 <i>O. formigenes</i> OxB<sup>T</sup> --> <a href="https://www.atcc.org/products/35274">ATCC 35274</a>
 
-<i>O. aliformigenes</i> Va3<sup>T</sup>
+<i>O. aliformigenes</i> Va3<sup>T</sup> --> DSM 115068
 
-<i>O. paeniformigenes</i> OxGP1<sup>T</sup>
+<i>O. paeniformigenes</i> OxGP1<sup>T</sup> --> DSM 115066
 
-<i>O. paraformigenes</i> HOxBLS<sup>T</sup>
+<i>O. paraformigenes</i> HOxBLS<sup>T</sup> --> DSM 115067
 
 <i>O. vibrioformis</i> WoOx3<sup>T</sup> --> <a href="https://www.dsmz.de/collection/catalogue/details/culture/DSM-5502">DSM 5502</a>
 
 ## Citation
-Chmiel JA, Carr C, Stuivenberg GA, Venema R, Chanyi RM, Al KF, Giguere D, Say H, Akouris PP, Domínguez Romero SA, Kwong A, Tai V, Koval SF, Razvi H, Bjazevic J, Burton JP (2022) New perspectives on an old grouping: the genomic and phenotypic variability of <i>Oxalobacter formigenes</i> and the implications for calcium oxalate stone prevention. Front. Microbiol. 13:1011102. doi: 10.3389/fmicb.2022.1011102
+Chmiel JA, Carr C, Stuivenberg GA, Venema R, Chanyi RM, Al KF, Giguere D, Say H, Akouris PP, Domínguez Romero SA, Kwong A, Tai V, Koval SF, Razvi H, Bjazevic J, Burton JP (2022) New perspectives on an old grouping: the genomic and phenotypic variability of <i>Oxalobacter formigenes</i> and the implications for calcium oxalate stone prevention. Front. Microbiol. 13:1011102. doi: <a href = "https://www.frontiersin.org/articles/10.3389/fmicb.2022.1011102/full">10.3389/fmicb.2022.1011102</a>
