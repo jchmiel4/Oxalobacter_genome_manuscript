@@ -42,11 +42,11 @@ Type strains can be found at the following culutre collection centers.
 
 <i>O. formigenes</i> OxB<sup>T</sup> --> <a href="https://www.atcc.org/products/35274">ATCC 35274</a>
 
-<i>O. aliiformigenes</i> Va3<sup>T</sup> --> DSM 115068
+<i>O. aliiformigenes</i> Va3<sup>T</sup> --> <a href="https://www.dsmz.de/collection/catalogue/details/culture/DSM-115068">DSM 115068</a>
 
-<i>O. paeniformigenes</i> OxGP1<sup>T</sup> --> DSM 115066
+<i>O. paeniformigenes</i> OxGP1<sup>T</sup> --> <a href="https://www.dsmz.de/collection/catalogue/details/culture/DSM-115066">DSM 115066</a>
 
-<i>O. paraformigenes</i> HOxBLS<sup>T</sup> --> DSM 115067
+<i>O. paraformigenes</i> HOxBLS<sup>T</sup> --> <a href="https://www.dsmz.de/collection/catalogue/details/culture/DSM-115067">DSM 115067</a>
 
 <i>O. vibrioformis</i> WoOx3<sup>T</sup> --> <a href="https://www.dsmz.de/collection/catalogue/details/culture/DSM-5502">DSM 5502</a>
 
