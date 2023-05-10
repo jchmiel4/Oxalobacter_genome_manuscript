@@ -44,7 +44,7 @@ Type strains can be found at the following culutre collection centers.
 
 <i>O. aliiformigenes</i> Va3<sup>T</sup> --> TSD-348, <a href="https://www.dsmz.de/collection/catalogue/details/culture/DSM-115068">DSM 115068</a>
 
-<i>O. paeniformigenes</i> OxGP1<sup>T</sup> --> TSD-347. <a href="https://www.dsmz.de/collection/catalogue/details/culture/DSM-115066">DSM 115066</a>
+<i>O. paeniformigenes</i> OxGP1<sup>T</sup> --> TSD-347, <a href="https://www.dsmz.de/collection/catalogue/details/culture/DSM-115066">DSM 115066</a>
 
 <i>O. paraformigenes</i> HOxBLS<sup>T</sup> --> TSD-346, <a href="https://www.dsmz.de/collection/catalogue/details/culture/DSM-115067">DSM 115067</a>
 
